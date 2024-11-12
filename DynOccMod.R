@@ -15,7 +15,7 @@ RDOcc.gcovs.negts.mcmc<-function(y,n,Xgam,Xlocs,gridnames,catnames,xgamnames,gam
   ### Xlocs = data fram of Grid ID values and associated latitude and longitude centroids
   ### catnames = vector of names for the surveillance categories
   ### xgamnames = vector names of covariates on colonization parameter (gamma)
-  ### xgam = matrix of covariates for colonization, including at minimum an intercept, columns should match xgamnames
+  ### xgam = matrix of covariates for colonization, including at minimum an intercept, columns should match xgamnames, dimensions should be the same as y but one fewer columns reflecting transitions
   ### gam.tune = tuning parameter for gamma, can be a single value or a vector of the same length as xgamnames
   ### GWtQU = TRUE/FALSE value as to whether the neighbor effect should be considered (Queen's neighbor)
   ### Gtimesince = TRUE/FALSE value as to whether the time since a cell was occupied should be included as a covariate
@@ -95,7 +95,7 @@ RDOcc.gcovs.negts.mcmc<-function(y,n,Xgam,Xlocs,gridnames,catnames,xgamnames,gam
   ### Get the time lag x matrix
   ###
   xgamts=array(gettimesince(zneb),c(sites,mths-1,1))
-  xgamts2=xgamts/39
+  xgamts2=xgamts/(mths-1)
   
   ###
   ### Location colonization neighbor effects
